@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const axios = require('axios');
 
 const app = express();
 
@@ -10,9 +11,11 @@ app.use(cors({
 
 app.use(bodyParser.json());
 
-app.post('/sendFraude', (req, res) => {
+app.post('/sendFraude', async (req, res) => {
     console.log(req.body);
-    res.json({ message: 'Data received and processed' });
+    const result = await axios.post('http://localhost:8000', req.body)
+    console.log(result.data)
+    res.json(result.data.prediction);
 });
 
 const PORT = 3000;

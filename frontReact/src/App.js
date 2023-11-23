@@ -10,7 +10,7 @@ import $ from 'jquery';
 import Home from './components/home';
 
 const App = () => {
-
+    const [result,setResult] = useState()
     const [formData, setFormData] = useState({
         distance_from_home: '',
         distance_from_last_transaction: '',
@@ -37,7 +37,7 @@ const App = () => {
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function(response) {
-                console.log(response);
+                setResult(response === 0 ? 'fraud' : 'no fraud');
             },
             error: function(error) {
                 console.error('Error:', error);
@@ -323,6 +323,9 @@ const App = () => {
 
 
                             <button type="submit">Verify</button>
+
+                            {result}
+
                         </form>
                     </section>
                 </div>

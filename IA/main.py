@@ -40,7 +40,7 @@ def read_root(input_data:InputData):
     rf = pickle.load(open('model.pkl', 'rb'))
     prediction = rf.predict([input_values])[0]
 
-    return prediction
+    return {"prediction":prediction}
 
 
 @app.get("/items/{item_id}")
