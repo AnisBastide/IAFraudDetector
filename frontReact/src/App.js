@@ -37,7 +37,7 @@ const App = () => {
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function(response) {
-                setResult(response === 0 ? 'fraud' : 'no fraud');
+                setResult(response === 1 ? 'fraud' : 'no fraud');
             },
             error: function(error) {
                 console.error('Error:', error);

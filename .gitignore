@@ -2,3 +2,4 @@ back/node_modules
 frontReact/node_modules
 IA/.idea
 .idea
+IA/__pycache__/*

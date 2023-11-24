@@ -12,9 +12,11 @@ app.use(cors({
 app.use(bodyParser.json());
 
 app.post('/sendFraude', async (req, res) => {
-    console.log(req.body);
-    const result = await axios.post('http://localhost:8000', req.body)
-    console.log(result.data)
+    let result
+    try{
+         result = await axios.post('http://localhost:8000', req.body)
+    }catch (e){
+    }
     res.json(result.data.prediction);
 });
 

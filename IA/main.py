@@ -6,9 +6,18 @@ import pandas as pd
 from pydantic import BaseModel
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+# Allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class InputData(BaseModel):
     distance_from_home: float
@@ -21,14 +30,6 @@ class InputData(BaseModel):
 
 @app.post("/")
 def read_root(input_data:InputData):
-    distance_from_home = 50
-    distance_from_last_transaction = 25
-    ratio_to_median_purchase_price = 1.9
-    repeat_retailer = 1
-    used_chip = 1
-    used_pin_number = 1
-    online_order = 0
-
     input_values = [
         input_data.distance_from_home, input_data.distance_from_last_transaction, input_data.ratio_to_median_purchase_price,
         input_data.repeat_retailer, input_data.used_chip, input_data.used_pin_number,
